@@ -28,7 +28,7 @@ if you want the app to be accessible generally, as well as over Tor. Use
 
 ```Procfile
 foo: PORT=9999 ./tor/bin/run_tor <cmd you'd normally run>
-```persistent
+```
 
 Your app will only be accessible over Tor, through your configured
 `.onion` address.
