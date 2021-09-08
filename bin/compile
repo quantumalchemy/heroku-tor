@@ -95,6 +95,9 @@ echo "${TOR_SRC_NAME}" > $CACHE_DIR/tor_version.txt
 
 cat > ${BUILD_DIR}/tor/bin/${RUN_COMMAND} <<EOF
 #!/usr/bin/env bash
+echo "Setting up hidden service"
+
+if [ -z ${HIDDEN_DOT_ONION} ]; then echo \${HIDDEN_DOT_ONION} > ${HOME}/hidden_service/hostname; fi
 
 echo "HiddenServiceDir ${HOME}/hidden_service/" > $HOME/tor/etc/tor/torrc
 echo "HiddenServicePort 80 127.0.0.1:\${PORT}" >> $HOME/tor/etc/tor/torrc
