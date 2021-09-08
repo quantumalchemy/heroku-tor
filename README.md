@@ -1,6 +1,9 @@
 # Tor Hidden Service Buildpack for Heroku
 # UPDATED Tor v 0.4.6.7
+
+
 This buildpack sets up a Tor hidden service for your app on Heroku.
+## Tor Version 3 urls
 
 ## Setup
 
@@ -9,7 +12,7 @@ Create a Heroku app as normal, with any buildpacks you typically use.
 Then:
 
 ```bash
-$ heroku buildpacks:add https://github.com/vidbme/heroku-tor.git
+$ heroku buildpacks:add https://github.com/quantumalchemy/heroku-tor.git
 ```
 
 With the buildpack installed, you'll need to modify your Procfile such that
@@ -30,15 +33,23 @@ foo: PORT=9999 ./tor/bin/run_tor <cmd you'd normally run>
 Your app will only be accessible over Tor, through your configured
 `.onion` address.
 
-## Variables
+## Maintain your own v3 url 
+## Setup:
 
-Of course, Tor hidden services require that you provide a private_key and it's
-SHA, for the .onion name. You'll need to provide these as env vars:
+Tor hidden services Once your require that you provide a hs_ed25519_secret_key 
+v3 for the .onion name.
 
-* `HIDDEN_PRIVATE_KEY`: The contents of a private_key file
-* `HIDDEN_DOT_ONION`: The onion name for the private_key.
+1. Create the directory -> 'hidden_service'  in the root of your build repo.
+2. Copy ONLY the: hs_ed25519_secret_key file from '/app/hidden_service' the running dyno on first deployment to ->
+'hidden_service' that you just created in your git build repo
+
+3. You'll need to provide these as env vars:
+
+* `HIDDEN_DOT_ONION`:  from the hostname file under the running dyno 'hidden_service'
+4. After commited changes - re deploy .. and Enjoy!
 
 ## Features
 
-* Verifies integrity (see yourself how its done, I'm not sure its correct)
+* Verifies tor integrity
 * Caches compilation
+* Updated to work for Tor persistent v3 urls!
