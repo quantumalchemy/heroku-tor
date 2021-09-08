@@ -47,7 +47,7 @@ v3 for the .onion url (hostname).
 * `HIDDEN_DOT_ONION`:  from the hostname file under the running dyno 'hidden_service'
 3. After commited changes - re deploy .. and Enjoy!
 
-## Features
+## Features 
 
 * Verifies tor integrity
 * Caches compilation
